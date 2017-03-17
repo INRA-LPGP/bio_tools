@@ -1,4 +1,6 @@
 - Use OrderedDict to store parameters
+- Parsing stderr output when running cmd
+- Mark some parameters as essential and check they are here
 - Better handling of paths (os.path ?)
 - Handle extra commands for tools (ex: stacks --> export PATH, module load etc...)
 - Parameters for Samtools, BWA, Bedtools
