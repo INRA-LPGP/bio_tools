@@ -1,0 +1,4 @@
+- Use OrderedDict to store parameters
+- Better handling of paths (os.path ?)
+- Handle extra commands for tools (ex: stacks --> export PATH, module load etc...)
+- Parameters for Samtools, BWA, Bedtools
