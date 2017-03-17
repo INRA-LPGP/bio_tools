@@ -1,0 +1,45 @@
+{
+    "SHELL": {
+        "name": "SHELL",
+        "type": "STR",
+        "default": "!/bin/sh",
+        "flag": ""
+    },
+    "EMAIL_ADRESS": {
+        "name": "EMAIL_ADRESS",
+        "type": "MAIL",
+        "default": "rferon@inra.fr",
+        "flag": "-M"
+    },
+    "MAIL_OPTIONS": {
+        "name": "MAIL_OPTIONS",
+        "type": "STR",
+        "default": "bea",
+        "flag": "-m"
+    },
+    "JOB_NAME": {
+        "name": "JOB_NAME",
+        "type": "STR",
+        "default": "",
+        "flag": "-N"
+    },
+    "N_THREADS": {
+        "name": "N_THREADS",
+        "type": "INT",
+        "default": "1",
+        "flag": "-pe parallel_smp"
+    },
+    "MEM": {
+        "name": "MEM",
+        "type": "MEMORY",
+        "default": "8G",
+        "flag": "-l mem="
+    },
+    "H_VMEM": {
+        "name": "H_VMEM",
+        "type": "MEMORY",
+        "default": "8G",
+        "flag": "-l h_vmem="
+    }
+}
+

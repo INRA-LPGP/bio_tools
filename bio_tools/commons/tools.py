@@ -1,0 +1,2 @@
+# Tools
+STACKS = 'STACKS'
