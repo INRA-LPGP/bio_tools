@@ -1,4 +1,3 @@
-- Use OrderedDict to store parameters
 - Parsing stderr output when running cmd
 - Mark some parameters as essential and check they are here
 - Better handling of paths (os.path ?)

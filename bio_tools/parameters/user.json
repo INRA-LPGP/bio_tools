@@ -3,7 +3,7 @@
         "name": "SHELL",
         "type": "STR",
         "default": "!/bin/sh",
-        "flag": ""
+        "flag": null
     },
     "EMAIL_ADRESS": {
         "name": "EMAIL_ADRESS",

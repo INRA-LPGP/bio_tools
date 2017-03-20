@@ -1,4 +1,10 @@
 {
+    "CMD": {
+        "name": "CMD",
+        "type": "STR",
+        "default": "",
+        "flag": null
+    },
     "BATCH_ID": {
         "name": "BATCH_ID",
         "type": "INT",

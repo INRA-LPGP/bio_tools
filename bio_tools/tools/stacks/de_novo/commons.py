@@ -1,8 +1,5 @@
-# Name
-DE_NOVO = "stacks/de_novo/"
-COMMAND = "denovo_map.pl"
-
 # STACKS de_novo parameters
+CMD = 'CMD'
 BATCH_ID = 'BATCH_ID'
 OUTPUT_PATH = 'OUTPUT_PATH'
 POPULATION_MAP = 'POPULATION_MAP'

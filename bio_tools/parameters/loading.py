@@ -1,4 +1,5 @@
 import json
+from collections import OrderedDict
 from .parameter import Parameter
 from commons.parameter import *
 
@@ -18,7 +19,7 @@ def load_json(path):
         return None
 
     try:
-        return json.load(parameters_f)
+        return json.load(parameters_f, object_pairs_hook=OrderedDict)
     except json.decoder.JSONDecodeError:
         print('** Error: could not load parameters from file "' +
               path + '".\n' +
@@ -81,7 +82,7 @@ def initialize(json_path):
         print('** Could not load default parameters.')
         return None
 
-    parameters = {}
+    parameters = OrderedDict()
 
     for name, data in json_data.items():
         try:
