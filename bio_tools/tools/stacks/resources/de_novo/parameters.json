@@ -1,0 +1,188 @@
+{
+    "CMD": {
+        "name": "CMD",
+        "type": "STR",
+        "default": "",
+        "flag": null
+    },
+    "BATCH_ID": {
+        "name": "BATCH_ID",
+        "type": "INT",
+        "default": "0",
+        "flag": "-b"
+    },
+    "OUTPUT_PATH": {
+        "name": "OUTPUT_PATH",
+        "type": "DIR",
+        "default": "./denovo_map/",
+        "flag": "-o"
+    },
+    "POPULATION_MAP": {
+        "name": "POPULATION_MAP",
+        "type": "FILE_I",
+        "default": "popmap.txt",
+        "flag": "-O"
+    },
+    "CROSS_TYPE": {
+        "name": "CROSS_TYPE",
+        "type": "CROSS",
+        "default": "",
+        "flag": "-A"
+    },
+    "N_THREADS": {
+        "name": "N_THREADS",
+        "type": "INT",
+        "default": "16",
+        "flag": "-T"
+    },
+    "EXE_PATH": {
+        "name": "EXE_PATH",
+        "type": "DIR",
+        "default": "",
+        "flag": "-e"
+    },
+    "DRY_RUN": {
+        "name": "DRY_RUN",
+        "type": "BOOL",
+        "default": "False",
+        "flag": "-d"
+    },
+    "HELP_MESSAGE": {
+        "name": "HELP_MESSAGE",
+        "type": "BOOL",
+        "default": "False",
+        "flag": "-h"
+    },
+    "PARENTS_SEQUENCES_FILE": {
+        "name": "PARENTS_SEQUENCES_FILE",
+        "type": "FILE_I",
+        "default": "",
+        "flag": "-p"
+    },
+    "PROGENY_SEQUENCES_FILE": {
+        "name": "PROGENY_SEQUENCES_FILE",
+        "type": "FILE_I",
+        "default": "",
+        "flag": "-r"
+    },
+    "INDIVIDUAL_SEQUENCES_FILE": {
+        "name": "INDIVIDUAL_SEQUENCES_FILE",
+        "type": "FILE_I",
+        "default": "",
+        "flag": "-s"
+    },
+    "SAMPLES_DIRECTORY": {
+        "name": "SAMPLES_DIRECTORY",
+        "type": "DIR",
+        "default": "../samples/",
+        "flag": "--samples"
+    },
+    "IDENTICAL_READS_FOR_STACK": {
+        "name": "IDENTICAL_READS_FOR_STACK",
+        "type": "INT",
+        "default": "3",
+        "flag": "-m"
+    },
+    "MISMATCHES_IN_INDIVIDUAL": {
+        "name": "MISMATCHES_IN_INDIVIDUAL",
+        "type": "INT",
+        "default": "2",
+        "flag": "-M"
+    },
+    "MISMATCHES_IN_CATALOG": {
+        "name": "MISMATCHES_IN_CATALOG",
+        "type": "INT",
+        "default": "1",
+        "flag": "-n"
+    },
+    "ALLOW_GAPS": {
+        "name": "ALLOW_GAPS",
+        "type": "BOOL",
+        "default": "False",
+        "flag": "--gapped"
+    },
+    "INDENTICAL_READS_FOR_STACK_PROGENY": {
+        "name": "INDENTICAL_READS_FOR_STACK_PROGENY",
+        "type": "INT",
+        "default": "3",
+        "flag": "-P"
+    },
+    "MISMATCHES_IN_SECONDARY_READS": {
+        "name": "MISMATCHES_IN_SECONDARY_READS",
+        "type": "INT",
+        "default": "5",
+        "flag": "-N"
+    },
+    "REMOVE_REPETITIVE_STACKS": {
+        "name": "REMOVE_REPETITIVE_STACKS",
+        "type": "BOOL",
+        "default": "False",
+        "flag": "-t"
+    },
+    "DISABLE_HAPLOTYPES_FROM_SECONDARY": {
+        "name": "DISABLE_HAPLOTYPES_FROM_SECONDARY",
+        "type": "BOOL",
+        "default": "False",
+        "flag": "-H"
+    },
+    "DATABASE_NAME": {
+        "name": "DATABASE_NAME",
+        "type": "STR",
+        "default": "Romain_radtags",
+        "flag": "-B"
+    },
+    "DATABASE_DESCRIPTION": {
+        "name": "DATABASE_DESCRIPTION",
+        "type": "STR",
+        "default": "Denovo_map",
+        "flag": "-D"
+    },
+    "DISABLE_DATABASE": {
+        "name": "DISABLE_DATABASE",
+        "type": "BOOL",
+        "default": "False",
+        "flag": "-S"
+    },
+    "STARTING_SAMPLE_ID": {
+        "name": "STARTING_SAMPLE_ID",
+        "type": "INT",
+        "default": "0",
+        "flag": "-i"
+    },
+    "CREATE_DATABASE": {
+        "name": "CREATE_DATABASE",
+        "type": "BOOL",
+        "default": "True",
+        "flag": "--create_db"
+    },
+    "OVERWRITE_DATABASE": {
+        "name": "OVERWRITE_DATABASE",
+        "type": "BOOL",
+        "default": "False",
+        "flag": "--overw_db"
+    },
+    "BOUND_LOW_USTACKS": {
+        "name": "BOUND_LOW_USTACKS",
+        "type": "INT",
+        "default": "0",
+        "flag": "--bound_low"
+    },
+    "BOUND_HIGH_USTACKS": {
+        "name": "BOUND_HIGH_USTACKS",
+        "type": "INT",
+        "default": "1",
+        "flag": "--bound_high"
+    },
+    "ALPHA_USTACKS": {
+        "name": "ALPHA_USTACKS",
+        "type": "FLOAT",
+        "default": "0.05",
+        "flag": "--alpha"
+    },
+    "PIPELINE_COMMAND": {
+        "name": "PIPELINE_COMMAND",
+        "type": "PIPE",
+        "default": "",
+        "flag": "-X"
+    }
+}
