@@ -93,3 +93,5 @@ ENV/
 test.*
 test/
 resources.txt
+*denovo_map.sh
+user.json
