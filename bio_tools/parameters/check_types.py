@@ -47,7 +47,7 @@ def is_file_o(value):
     """
     Verifies that value is a path to an existing output directory.
     """
-    if not (type(value) is str and isdir(''.join(value.split('/')[:-1]))):
+    if not (type(value) is str and isdir('/'.join(value.split('/')[:-1]))):
         print('** Error: "' + str(value) + '" is not a path to an existing file.')
         raise ValueError
 
@@ -103,6 +103,6 @@ def is_memory(value):
     """
     Verifies that value is a memory value (1G, 8G, 15G, ...).
     """
-    if not (type(value) is str and re.match(r'(\d+)G', value)):
+    if not (type(value) is str and re.match(r'[h_vmem=]+(\d+)G', value)):
         print('** Error: "' + str(value) + '" is not a valid memory value.')
         raise ValueError

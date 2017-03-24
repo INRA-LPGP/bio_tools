@@ -2,7 +2,7 @@
     "CMD": {
         "name": "CMD",
         "type": "STR",
-        "default": "de_novo.pl",
+        "default": "denovo_map.pl",
         "flag": null,
         "required": "True"
     },
@@ -11,7 +11,7 @@
         "type": "INT",
         "default": "0",
         "flag": "-b",
-        "required": "False"
+        "required": "True"
     },
     "OUTPUT_PATH": {
         "name": "OUTPUT_PATH",

@@ -1,6 +1,7 @@
 import subprocess
 from parameters.check_types import is_file_o
 from parameters.parameters import Parameters
+from commons.types import *
 
 
 class Job:
@@ -49,9 +50,11 @@ class Job:
             file_f = open(file_p, 'w')
             for name in self.user_settings.list:
                 setting = getattr(self.user_settings, name)
-                to_write = self.write_parameter(setting)
+                to_write = self.write_setting(setting)
                 if to_write:
-                    file_f.write('#! "' + to_write + '\n')
+                    file_f.write(to_write)
+            file_f.write('\nexport PATH=/usr/local/bioinfo/src/Stacks/stacks-1.44/bin:$PATH')
+            file_f.write('\nmodule load compiler/gcc-4.9.1\n')
             file_f.write('\n' + self.cmd)
             self.qsub_file = file_p
         except ValueError:
@@ -83,9 +86,9 @@ class Job:
 
     def set_user_settings(self, arg):
         if (isinstance(arg, dict)):
-            self.parameters.set_from_dictionary(arg)
+            self.user_settings.set_from_dictionary(arg)
         elif (isinstance(arg, str)):
-            self.parameters.set_from_json(arg)
+            self.user_settings.set_from_json(arg)
         self.update()
 
     def write_parameter(self, parameter):
@@ -93,9 +96,31 @@ class Job:
         if parameter.value:
             if parameter.flag:
                 cmd += parameter.flag + ' '
-            cmd += str(parameter.value) + ' '
+            if parameter.type != BOOL:
+                cmd += str(parameter.value) + ' '
         elif parameter.required:
             if parameter.flag:
                 cmd += parameter.flag + ' '
-            cmd += str(parameter.default) + ' '
+            if parameter.type != BOOL:
+                cmd += str(parameter.default) + ' '
+        return cmd
+
+    def write_setting(self, setting):
+        cmd = '#'
+        if setting.value:
+            if setting.value == 'SHELL':
+                cmd += setting.value
+            if setting.flag:
+                cmd += '$ ' + setting.flag + ' '
+            cmd += str(setting.value) + ' '
+            cmd = cmd.rstrip(' ') + '\n'
+        elif setting.required:
+            if setting.value == 'SHELL':
+                cmd += setting.value
+            if setting.flag:
+                cmd += '$ ' + setting.flag + ' '
+            cmd += str(setting.default) + ' '
+            cmd = cmd.rstrip(' ') + '\n'
+        else:
+            cmd = ''
         return cmd
