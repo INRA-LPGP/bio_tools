@@ -7,3 +7,4 @@
 - Add version and store instructions accordingly
 - Add a rules system for parameters in tools (For instance, if DB activated, batch number is required etc...)
 - Change file path in generate qsub file
+- Add repeats of a parameters (ex: stacks -s parameter ...)
