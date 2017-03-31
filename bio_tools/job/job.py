@@ -1,5 +1,5 @@
 import subprocess
-from parameters.check_types import is_file_o
+from parameters.type_checks import is_file_o
 from parameters.parameters import Parameters
 from commons.types import *
 
