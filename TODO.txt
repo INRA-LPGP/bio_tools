@@ -1,10 +1,24 @@
-- Redo errors handling
-- Parsing stderr output when running cmd
-- Mark some parameters as essential and check they are here
-- Better handling of paths (os.path ?)
-- Handle extra commands for tools (ex: stacks --> export PATH, module load etc...)
-- Parameters for Samtools, BWA, Bedtools
-- Add version and store instructions accordingly
-- Add a rules system for parameters in tools (For instance, if DB activated, batch number is required etc...)
+## Modules:
+- Verify a module's integrity before loading it (when loading in tools init)
+- Add versions for tools (in case version changes parameters). One subfolder per version
+- Better handling of relationship between a tool and its modules (Maybe automatic parsing of folders to generate an index of tools?)
+- Add other Stacks modules
+- Add tool BWA
+- Add tool Samtools
+- Add tool Bedtools (later)
+
+## Parameters:
+- Store parameters as a dictionary in Parameters rather than attributes of Parameters
+- Allow multiple instances of one parameter (should this be defined in parameter description?)
+- Implement rules system
+- Implement extra tool-specific commands (Stacks: load module etc..)
+- Completely remove non standard types and add them as rules (MEMORY, MAIL, etc...)
+- Cleanup error handling (errors should only be handled in once place)
+
+## Job:
 - Change file path in generate qsub file
-- Add repeats of a parameters (ex: stacks -s parameter ...)
+- Parsing stderr output when running cmd
+
+## General:
+- Handle paths with os.path
+- Internal architecture for relative imports using os.path(__FILE__)
