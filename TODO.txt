@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## Modules:
 - Verify a module's integrity before loading it (when loading in tools init)
 - Add versions for tools (in case version changes parameters). One subfolder per version
@@ -14,6 +15,7 @@
 - Implement extra tool-specific commands (Stacks: load module etc..)
 - Completely remove non standard types and add them as rules (MEMORY, MAIL, etc...)
 - Cleanup error handling (errors should only be handled in once place)
+- Decide of a location for default user settings and load the file when creating a job
 
 ## Job:
 - Change file path in generate qsub file
