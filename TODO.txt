@@ -2,9 +2,9 @@
 - Parsing stderr output when running cmd
 - Mark some parameters as essential and check they are here
 - Better handling of paths (os.path ?)
-- Handle extra commands for tools (ex: stacks --> export PATH, module load etc...)
 - Parameters for Samtools, BWA, Bedtools
 - Add version and store instructions accordingly
 - Add a rules system for parameters in tools (For instance, if DB activated, batch number is required etc...)
 - Change file path in generate qsub file
 - Add repeats of a parameters (ex: stacks -s parameter ...)
+- User settings : where are defaults, load when creating job
