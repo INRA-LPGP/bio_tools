@@ -1,4 +1,5 @@
 import subprocess
+import os
 from parameters.check_types import is_file_o
 from parameters.parameters import Parameters
 from commons.types import *
@@ -10,9 +11,13 @@ class Job:
     work with a tool.
     """
     def __init__(self, tool, module, parameters=None, user_settings=None):
+        self.instructions = tool.instructions
         self.name = tool.name
-        self.path = ('./tools/' + tool.name.lower() + '/' +
-                     module.lower() + '.json')
+        if module:
+            self.path = os.path.join('./tools', tool.path,
+                                     tool.modules[module] + '.json')
+        else:
+            self.path = os.path.join('./tools', tool.path, tool.name + '.json')
         self.parameters = Parameters(self.path)
         self.user_settings = Parameters('./user_defaults.json')
         self.cmd = ''
@@ -53,8 +58,8 @@ class Job:
                 to_write = self.write_setting(setting)
                 if to_write:
                     file_f.write(to_write)
-            file_f.write('\nexport PATH=/usr/local/bioinfo/src/Stacks/stacks-1.44/bin:$PATH')
-            file_f.write('\nmodule load compiler/gcc-4.9.1\n')
+            for instruction in self.instructions:
+                file_f.write(instruction + '\n')
             file_f.write('\n' + self.cmd)
             self.qsub_file = file_p
         except ValueError:
@@ -98,7 +103,10 @@ class Job:
                 cmd += parameter.flag + ' '
             if parameter.type != BOOL:
                 cmd += str(parameter.value) + ' '
-        elif parameter.required:
+        elif parameter.required and parameter.default:
+            print('* Warning: no user-defined value for parameter ' +
+                  parameter.name + '. Setting value to default: ' +
+                  parameter.default + '.')
             if parameter.flag:
                 cmd += parameter.flag + ' '
             if parameter.type != BOOL:
