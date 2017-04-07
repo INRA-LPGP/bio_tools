@@ -50,15 +50,7 @@ class Parameter:
             return type_checks.is_file_i(value)
         elif self.type == FILE_O:
             return type_checks.is_file_o(value)
-        elif self.type == CROSS:
-            return type_checks.is_cross(value)
         elif self.type == BOOL:
             return type_checks.is_bool(value)
         elif self.type == STR:
             return type_checks.is_str(value)
-        elif self.type == PIPE:
-            return type_checks.is_pipe(value)
-        elif self.type == MAIL:
-            return type_checks.is_mail(value)
-        elif self.type == MEMORY:
-            return type_checks.is_memory(value)

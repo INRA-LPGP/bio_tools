@@ -8,7 +8,7 @@
     },
     "EMAIL_ADRESS": {
         "name": "EMAIL_ADRESS",
-        "type": "MAIL",
+        "type": "STR",
         "default": "rferon@inra.fr",
         "flag": "-M",
         "required": "False"
@@ -36,14 +36,14 @@
     },
     "MEM": {
         "name": "MEM",
-        "type": "MEMORY",
+        "type": "STR",
         "default": "8G",
         "flag": "-l",
         "required": "False"
     },
     "H_VMEM": {
         "name": "H_VMEM",
-        "type": "MEMORY",
+        "type": "STR",
         "default": "8G",
         "flag": "-l",
         "required": "False"

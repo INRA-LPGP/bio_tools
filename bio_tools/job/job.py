@@ -2,6 +2,7 @@ import subprocess
 from parameters.type_checks import is_file_o
 from parameters.parameters import Parameters
 from commons.types import *
+import os
 
 
 class Job:
@@ -9,7 +10,7 @@ class Job:
     Object Job stores information about a tool and implement methods to
     work with a tool.
     """
-    def __init__(self, tool, module, parameters=None, user_settings=None):
+    def __init__(self, tool, module, parameters=None, settings=None):
         self.instructions = tool.instructions
         self.name = tool.name
         if module:

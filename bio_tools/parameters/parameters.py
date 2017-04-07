@@ -11,14 +11,13 @@ class Parameters:
         json_data = self.load_json(json_path)
         if not json_data:
             print('** Could not load default parameters.')
-
         for name, data in json_data.items():
             try:
-                setattr(self, name, Parameter(name_s=data[NAME],
+                setattr(self, name, Parameter(name=data[NAME],
                                               type_s=data[TYPE],
-                                              default_s=data[DEFAULT],
-                                              flag_s=data[FLAG],
-                                              required_s=data[REQUIRED]))
+                                              default=data[DEFAULT],
+                                              flag=data[FLAG],
+                                              required=data[REQUIRED]))
                 self.list.append(name)
             except KeyError:
                 print('** Error: parameter "' + name + '" does not exist.')

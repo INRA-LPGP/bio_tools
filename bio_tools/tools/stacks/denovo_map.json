@@ -29,7 +29,7 @@
     },
     "CROSS_TYPE": {
         "name": "CROSS_TYPE",
-        "type": "CROSS",
+        "type": "STR",
         "default": "",
         "flag": "-A",
         "required": "False"
@@ -211,7 +211,7 @@
     },
     "PIPELINE_COMMAND": {
         "name": "PIPELINE_COMMAND",
-        "type": "PIPE",
+        "type": "STR",
         "default": "",
         "flag": "-X",
         "required": "False"
