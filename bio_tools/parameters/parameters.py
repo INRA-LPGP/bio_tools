@@ -1,7 +1,7 @@
 from collections import OrderedDict
 import json
 from .parameter import Parameter
-from commons.parameter import *
+from ..commons.parameter import *
 
 
 class Parameters:

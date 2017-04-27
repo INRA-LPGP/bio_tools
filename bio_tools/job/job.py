@@ -1,8 +1,8 @@
 import subprocess
-from parameters.type_checks import is_file_o
-from parameters.parameters import Parameters
-from commons.types import *
 import os
+from ..parameters.type_checks import is_file_o
+from ..parameters.parameters import Parameters
+from ..commons.types import *
 
 
 class Job:
