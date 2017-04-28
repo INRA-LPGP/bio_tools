@@ -1,4 +1,4 @@
-# Tools
+# General tool properties
 NAME = 'NAME'
 PATH = 'PATH'
 INSTRUCTIONS = 'INSTRUCTIONS'

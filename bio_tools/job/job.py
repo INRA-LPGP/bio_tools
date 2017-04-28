@@ -3,6 +3,7 @@ import os
 from ..parameters.type_checks import is_file_o
 from ..parameters.parameters import Parameters
 from ..commons.types import *
+from .. import resources
 
 
 class Job:
@@ -10,19 +11,28 @@ class Job:
     Object Job stores information about a tool and implement methods to
     work with a tool.
     """
-    def __init__(self, tool, module, parameters=None, settings=None):
+    def __init__(self, tool, module, parameters=None, settings=None,
+                 env=None):
         self.instructions = tool.instructions
         self.name = tool.name
         if module:
-            self.path = os.path.join('./tools', tool.path,
-                                     tool.modules[module] + '.json')
+            self.tool_path = os.path.join(resources.TOOLS,
+                                          tool.modules[module])
         else:
-            self.path = os.path.join('./tools', tool.path, tool.name + '.json')
-        self.parameters = Parameters(self.path)
-        self.user_settings = Parameters('./user_defaults.json')
+            self.tool_path = os.path.join(resources.TOOLS,
+                                          tool.defaults)
+        self.parameters = Parameters(self.tool_path)
+        if parameters:
+            self.parameters.set_from_dictionary(parameters)
+        self.env = env
+        if env:
+            self.user_settings = Parameters(os.path.join(resources.ENVS,
+                                                         env.defaults))
+        else:
+            self.user_settings = None
         self.cmd = ''
         self.update()
-        self.qsub_file = None
+        self.qsub_file_path = None
 
     def update(self):
         """
@@ -50,24 +60,29 @@ class Job:
         Generate a shell file with the command in the format required
         to submit a job on an HPC platform.
         """
-        try:
-            is_file_o(file_p)
-            file_f = open(file_p, 'w')
-            for name in self.user_settings.list:
-                setting = getattr(self.user_settings, name)
-                to_write = self.write_setting(setting)
-                if to_write:
-                    file_f.write(to_write)
-            for instruction in self.instructions:
-                file_f.write(instruction + '\n')
-            file_f.write('\n' + self.cmd)
-            self.qsub_file = file_p
-        except ValueError:
-            print('** Error: could not generate qsub file.')
+        if self.env:
+            try:
+                is_file_o(file_p)
+                file_f = open(file_p, 'w')
+                for name in self.user_settings.list:
+                    setting = getattr(self.user_settings, name)
+                    to_write = self.write_setting(setting)
+                    if to_write:
+                        file_f.write(to_write)
+                for instruction in self.instructions:
+                    file_f.write(instruction + '\n')
+                file_f.write('\n' + self.cmd)
+                self.qsub_file = file_p
+            except ValueError:
+                print('** Error: could not generate qsub file.')
+        else:  # Add a list of available environments
+            print('** Error: you need to specify an environment to generate' +
+                  ' a qsub file. Available environments: ')
 
     def submit(self):
         """
-        Submit a shell file with the command as a job on an HPC platform.
+        Submit a shell file with the command as a job on an SGE platform.
+        Maybe this should also be in resources/env/sge or something
         """
         try:
             if not self.qsub_file:
@@ -96,6 +111,7 @@ class Job:
             self.user_settings.set_from_json(arg)
         self.update()
 
+    # Move this to parameter
     def write_parameter(self, parameter):
         cmd = ''
         if parameter.value:
@@ -113,6 +129,7 @@ class Job:
                 cmd += str(parameter.default) + ' '
         return cmd
 
+    # This is crap
     def write_setting(self, setting):
         cmd = '#'
         if setting.value:

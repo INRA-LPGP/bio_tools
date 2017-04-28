@@ -5,5 +5,4 @@ par = {'N_THREADS': 8,
 
 denovo = Job(tools.stacks, 'denovo_map')
 denovo.set_parameters(par)
-print(denovo.parameters.N_THREADS.value)
 denovo.create_qsub_file()
