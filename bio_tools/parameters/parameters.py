@@ -1,24 +1,24 @@
 from collections import OrderedDict
 import json
-from .parameter import Parameter
-from ..commons.parameter import *
+from bio_tools.parameters.parameter import Parameter
+from bio_tools.commons.parameter import *
 
 
 class Parameters:
 
     def __init__(self, json_path):
-        self.list = []
+        self.list = {}
         json_data = self.load_json(json_path)
         if not json_data:
             print('** Could not load default parameters.')
+            return 0
         for name, data in json_data.items():
             try:
-                setattr(self, name, Parameter(name=data[NAME],
-                                              type_s=data[TYPE],
-                                              default=data[DEFAULT],
-                                              flag=data[FLAG],
-                                              required=data[REQUIRED]))
-                self.list.append(name)
+                self.list[name] = Parameter(name=data[NAME],
+                                            type_s=data[TYPE],
+                                            default=data[DEFAULT],
+                                            flag=data[FLAG],
+                                            required=data[REQUIRED])
             except KeyError:
                 print('** Error: parameter "' + name + '" does not exist.')
             except ValueError:
@@ -30,15 +30,13 @@ class Parameters:
         Loads a json file containing the following information about
         each parameter: Name, Value.
         """
-        for name, data in dictionary.items():
+        for name, value in dictionary.items():
             try:
-                p = getattr(self, name)
-                f = getattr(p, 'set_value')
-                setattr(p, name, f(data))
+                self.list[name].set_value(value)
             except KeyError:
                 print('** Error: parameter "' + name + '" does not exist.')
             except ValueError:
-                print('** Error: could not affect value "' + str(data) +
+                print('** Error: could not affect value "' + str(value) +
                       '" to parameter "' + name + '".')
             except TypeError:
                 if parameters is None or len(parameters) == 0:

@@ -1,1 +1,1 @@
-from .job import Job
+from bio_tools.job.job import Job

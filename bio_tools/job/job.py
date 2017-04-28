@@ -1,9 +1,9 @@
 import subprocess
 import os
-from ..parameters.type_checks import is_file_o
-from ..parameters.parameters import Parameters
-from ..commons.types import *
-from .. import resources
+from bio_tools.parameters.type_checks import is_file_o
+from bio_tools.parameters.parameters import Parameters
+from bio_tools.commons.types import *
+import bio_tools.resources as resources
 
 
 class Job:
@@ -13,11 +13,11 @@ class Job:
     """
     def __init__(self, tool, module, parameters=None, settings=None,
                  env=None):
-        self.instructions = tool.instructions
-        self.name = tool.name
+        self.instructions = tool.INSTRUCTIONS
+        self.name = tool.NAME
         if module:
             self.tool_path = os.path.join(resources.TOOLS,
-                                          tool.modules[module])
+                                          tool.MODULES[module])
         else:
             self.tool_path = os.path.join(resources.TOOLS,
                                           tool.defaults)
@@ -31,7 +31,8 @@ class Job:
         else:
             self.user_settings = None
         self.cmd = ''
-        self.update()
+        if parameters:
+            self.update()
         self.qsub_file_path = None
 
     def update(self):
@@ -39,9 +40,8 @@ class Job:
         Generate / regenerate the cmd string from parameters
         """
         self.cmd = ''
-        for p in self.parameters.list:
-            parameter = getattr(self.parameters, p)
-            self.cmd += self.write_parameter(parameter)
+        for p, data in self.parameters.list.items():
+            self.cmd += self.write_parameter(data)
 
     def run(self):
         """
@@ -64,9 +64,8 @@ class Job:
             try:
                 is_file_o(file_p)
                 file_f = open(file_p, 'w')
-                for name in self.user_settings.list:
-                    setting = getattr(self.user_settings, name)
-                    to_write = self.write_setting(setting)
+                for name, data in self.user_settings.list.items():
+                    to_write = self.write_setting(data)
                     if to_write:
                         file_f.write(to_write)
                 for instruction in self.instructions:
@@ -75,9 +74,10 @@ class Job:
                 self.qsub_file = file_p
             except ValueError:
                 print('** Error: could not generate qsub file.')
-        else:  # Add a list of available environments
+        else:
             print('** Error: you need to specify an environment to generate' +
-                  ' a qsub file. Available environments: ')
+                  ' a qsub file. Available environments: ' +
+                  resources.environments.show())
 
     def submit(self):
         """
@@ -120,9 +120,9 @@ class Job:
             if parameter.type != BOOL:
                 cmd += str(parameter.value) + ' '
         elif parameter.required and parameter.default:
-            print('* Warning: no user-defined value for parameter ' +
-                  parameter.name + '. Setting value to default: ' +
-                  parameter.default + '.')
+            print('** Warning: setting default value for required parameter ' +
+                  parameter.name + ' (' +
+                  parameter.default + ')')
             if parameter.flag:
                 cmd += parameter.flag + ' '
             if parameter.type != BOOL:

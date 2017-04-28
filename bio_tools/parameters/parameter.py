@@ -1,6 +1,6 @@
 from distutils.util import strtobool
-from . import type_checks
-from ..commons.types import *
+from bio_tools.parameters import type_checks
+from bio_tools.commons.types import *
 
 
 class Parameter:

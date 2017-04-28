@@ -1,6 +1,6 @@
 import os
 
-name = 'sge'
-path = 'sge'
-description = 'Sun Grid Engine High Performance Computation platform'
-defaults = os.path.join(path, name, 'user_defaults.json')
+NAME = 'sge'
+PATH = 'sge'
+DESCRIPTION = 'Sun Grid Engine High Performance Computation platform'
+DEFAULTS = os.path.join(PATH, NAME, 'user_defaults.json')
