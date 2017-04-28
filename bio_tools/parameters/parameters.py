@@ -7,7 +7,7 @@ from bio_tools.commons.parameter import *
 class Parameters:
 
     def __init__(self, json_path):
-        self.list = {}
+        self.list = OrderedDict()
         json_data = self.load_json(json_path)
         if not json_data:
             print('** Could not load default parameters.')

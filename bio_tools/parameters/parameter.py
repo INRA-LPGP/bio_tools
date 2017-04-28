@@ -54,3 +54,20 @@ class Parameter:
             return type_checks.is_bool(value)
         elif self.type == STR:
             return type_checks.is_str(value)
+
+    def write(self):
+        cmd = ''
+        if self.value:
+            if self.flag:
+                cmd += self.flag + ' '
+            if self.type != BOOL:
+                cmd += str(self.value) + ' '
+        elif self.required and self.default:
+            print('** Warning: setting default value for required parameter ' +
+                  self.name + ' (' +
+                  self.default + ')')
+            if self.flag:
+                cmd += self.flag + ' '
+            if self.type != BOOL:
+                cmd += str(self.default) + ' '
+        return cmd

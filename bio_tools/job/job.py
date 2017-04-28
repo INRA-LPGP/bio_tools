@@ -13,7 +13,6 @@ class Job:
     """
     def __init__(self, tool, module, parameters=None, settings=None,
                  env=None):
-        print(resources.tools.show())
         self.instructions = tool.INSTRUCTIONS
         self.name = tool.NAME
         if module:
@@ -21,14 +20,14 @@ class Job:
                                           tool.MODULES[module])
         else:
             self.tool_path = os.path.join(resources.TOOLS,
-                                          tool.defaults)
+                                          tool.DEFAULTS)
         self.parameters = Parameters(self.tool_path)
         if parameters:
             self.parameters.set_from_dictionary(parameters)
         self.env = env
         if env:
             self.user_settings = Parameters(os.path.join(resources.ENVS,
-                                                         env.defaults))
+                                                         env.DEFAULTS))
         else:
             self.user_settings = None
         self.cmd = ''
@@ -41,8 +40,9 @@ class Job:
         Generate / regenerate the cmd string from parameters
         """
         self.cmd = ''
-        for p, data in self.parameters.list.items():
-            self.cmd += self.write_parameter(data)
+        for name, par in self.parameters.list.items():
+            # self.cmd += self.write_parameter(data)
+            self.cmd += par.write()
 
     def run(self):
         """
