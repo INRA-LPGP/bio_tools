@@ -13,6 +13,7 @@ class Job:
     """
     def __init__(self, tool, module, parameters=None, settings=None,
                  env=None):
+        print(resources.tools.show())
         self.instructions = tool.INSTRUCTIONS
         self.name = tool.NAME
         if module:

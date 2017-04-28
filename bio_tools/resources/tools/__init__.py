@@ -1,4 +1,5 @@
 import pkgutil
+import bio_tools.commons as commons
 
 # Dynamically imports any submodule inside 'tools'
 __all__ = []
@@ -7,6 +8,32 @@ for loader, module_name, is_pkg in pkgutil.walk_packages(__path__):
     __all__.append(module_name)
     module = loader.find_module(module_name).load_module(module_name)
     exec('%s = module' % module_name)
+
+
+def get_data():
+    tools = []
+    for importer, modname, ispkg in pkgutil.iter_modules(__path__):
+        module = __import__(modname, fromlist="dummy")
+        tools.append({commons.NAME: module.NAME,
+                      commons.PATH: module.PATH,
+                      commons.DESCRIPTION: module.DESCRIPTION,
+                      commons.DEFAULTS: module.DEFAULTS,
+                      commons.INSTRUCTIONS: module.INSTRUCTIONS,
+                      commons.MODULES: module.MODULES})
+    return tools
+
+
+def show():
+    tools = get_data()
+    out = ''
+    for i, e in enumerate(tools):
+        out += (e[commons.NAME] +
+                ' (' +
+                e[commons.DESCRIPTION] +
+                ')')
+        if i < len(tools) - 1:
+            out += ', '
+    return out
 
 
 # Reference for future rules

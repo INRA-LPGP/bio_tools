@@ -30,5 +30,5 @@ def show():
                 e[commons.DESCRIPTION] +
                 ')')
         if i < len(env) - 1:
-            out += ','
+            out += ', '
     return out
